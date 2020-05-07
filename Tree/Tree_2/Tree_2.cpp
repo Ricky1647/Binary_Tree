@@ -67,12 +67,18 @@ int main()
 		min_heap.push(dot);
 	}
 	min_heap.print();
+	cout << endl;
+	min_heap.pop();
+	min_heap.print();
+	cout << endl;
+	min_heap.pop();
+	min_heap.print();
     return 0;
 }
 void MinHeap::print() {
 	int duck = 1;
 	int cat = 1;
-	for (int i = 1; i <= capacity; i++) {
+	for (int i = 1; i <= heapsize; i++) {
 		cout << heap[i] << "__";
 		if (i%duck == 0) {
 			cout << endl;
@@ -110,5 +116,15 @@ bool MinHeap::IsEmpty(){
 	return heapsize == 0;
 }
 void MinHeap::pop() {
-	
+	heap[1] = heap[heapsize];
+	heapsize--;
+	//int idx = heapsize;
+	for (int idx = 2; idx <= heapsize; idx++) {
+		while (idx != 1 && heap[idx / 2] > heap[idx]) {
+			HuffNode temp = heap[idx];
+			heap[idx] = heap[idx / 2];
+			heap[idx / 2] = temp;
+			idx /= 2;
+		}
+	}
 }
