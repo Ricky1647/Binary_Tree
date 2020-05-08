@@ -6,6 +6,7 @@
 #include<vector>
 #include<math.h>
 #include<string>
+#include<string.h>
 using namespace std;
 struct HuffNode {       //Leaf Node
 	 int data;
@@ -41,7 +42,7 @@ public:
 	void Inorder(HuffNode *current,int& a, int& max ,int level=0);
  	void pop();
 	void encode(HuffNode*root, string word = "");
-	void decode(HuffNode*root,char *arr,char symbol);
+	void decode(HuffNode&root,string& arr,int  i,char symbol=' ');
 	void Preorder(HuffNode *current);
 	HuffNode top();
 	int sizeback();
@@ -110,9 +111,11 @@ int main()
 	cout << "Huffman coding" << endl;
 	min_heap.encode(root);
 	cout << "==========================================" << endl;
-	char *face = {};
+	string ham;
+	int bb = 0;
 	cout << "Input sequence for decode: ";
-	while (cin >> face);
+	cin >> ham;
+	min_heap.decode(root, ham,bb);
      return 0;
 }
 void MinHeap::print() {
@@ -210,3 +213,28 @@ void MinHeap::encode(HuffNode *root , string word) {
 	if (root->rightChild != nullptr)
 		encode(root->rightChild , word + '0');
 }
+void MinHeap::decode(HuffNode&root, string& arr,int i, char symbol) {
+	//for (int i = 1; i <= arr.size(); i++) {
+	//}
+	struct HuffNode* ptr = &root;
+	if (i == arr.size())exit(0);
+		if (ptr->leftChild == nullptr&&ptr->rightChild == nullptr)
+		{
+			cout << ptr->symbol;
+			ptr = &root;
+			decode(ptr, arr, i, symbol);
+		}
+		if (root->leftChild != nullptr) {
+			if (arr[i] == '1') {		//	走左指數
+				decode(ptr->leftChild, arr, i + 1, symbol);
+			}
+		}
+		if (root->rightChild != nullptr) {
+			if (arr[i] == '0') {        //  走右指數
+				decode(ptr->rightChild, arr, i + 1, symbol);
+				i++;
+			}
+		}
+
+}
+//	void decode(HuffNode*root,string& arr,char symbol=' ');

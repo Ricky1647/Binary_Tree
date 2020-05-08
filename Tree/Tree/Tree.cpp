@@ -138,7 +138,9 @@ void decode(HuffNode& root, const string& s) {
 		if (ptr != nullptr)
 			if (ptr->leftNode == nullptr && ptr->rightNode == nullptr) {
 				cout << ptr->symbol;
+				cout << "ptr" << ptr << endl;
 				ptr = &root;
+				cout <<  root << endl;
 			}
 	}
 }
