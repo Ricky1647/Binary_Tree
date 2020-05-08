@@ -26,7 +26,7 @@ class MinHeap {
 public:
 	MinHeap() {
 		heapSize = 0;
-		capacity = 10;
+		capacity = 100;
 		heap = new T[capacity];
 	}
 	bool IsEmpty() {
@@ -208,3 +208,6 @@ int main() {
 	system("PAUSE");
 	return 0;
 }
+//9
+//A D T S R U C E _
+//9 8 7 6 5 4 3 2 1
