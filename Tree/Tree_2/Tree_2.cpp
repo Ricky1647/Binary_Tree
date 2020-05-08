@@ -42,7 +42,7 @@ public:
 	void Inorder(HuffNode *current,int& a, int& max ,int level=0);
  	void pop();
 	void encode(HuffNode*root, string word = "");
-	void decode(HuffNode&root,string& arr,int  i,char symbol=' ');
+	void decode(HuffNode&root,string& arr );
 	void Preorder(HuffNode *current);
 	HuffNode top();
 	int sizeback();
@@ -100,7 +100,9 @@ int main()
 	int max = 0;
 	cout << "Huffman Tree" << endl;
 	cout << "preorder : ";
+	//HuffNode *root = &(min_heap.top());
 	HuffNode *root = &(min_heap.top());
+	HuffNode root1 = min_heap.top();
 	min_heap.Preorder(root);
 	cout << endl;
 	cout << "inorder : ";
@@ -112,10 +114,10 @@ int main()
 	min_heap.encode(root);
 	cout << "==========================================" << endl;
 	string ham;
-	int bb = 0;
+	 
 	cout << "Input sequence for decode: ";
 	cin >> ham;
-	min_heap.decode(root, ham,bb);
+	min_heap.decode(root1, ham );
      return 0;
 }
 void MinHeap::print() {
@@ -213,28 +215,41 @@ void MinHeap::encode(HuffNode *root , string word) {
 	if (root->rightChild != nullptr)
 		encode(root->rightChild , word + '0');
 }
-void MinHeap::decode(HuffNode&root, string& arr,int i, char symbol) {
-	//for (int i = 1; i <= arr.size(); i++) {
-	//}
+void MinHeap::decode(HuffNode&root, string& arr ) {
+ 
 	struct HuffNode* ptr = &root;
-	if (i == arr.size())exit(0);
+	for (int i = 0; i< arr.size(); i++) {
+		if (ptr->leftChild != nullptr) {
+			if (arr[i] == '1') {		//	ǐオ计
+				ptr=ptr->leftChild;
+			}
+		}
+		if (ptr->rightChild != nullptr) {
+			if (arr[i] == '0') {        //  ǐ计
+				ptr=ptr->rightChild;
+			}
+		}
 		if (ptr->leftChild == nullptr&&ptr->rightChild == nullptr)
 		{
 			cout << ptr->symbol;
 			ptr = &root;
-			decode(ptr, arr, i, symbol);
 		}
-		if (root->leftChild != nullptr) {
-			if (arr[i] == '1') {		//	ǐオ计
-				decode(ptr->leftChild, arr, i + 1, symbol);
-			}
-		}
-		if (root->rightChild != nullptr) {
-			if (arr[i] == '0') {        //  ǐ计
-				decode(ptr->rightChild, arr, i + 1, symbol);
-				i++;
-			}
-		}
-
+	}
+	//struct HuffNode* ptr = &root;
+	//for (unsigned int i = 0; i < arr.size(); i++) {
+	//	if (arr[i] == '1' && ptr != nullptr) {
+	//		ptr = ptr->leftChild;
+	//	}
+	//	else if (arr[i] == '0' && ptr != nullptr) {
+	//		ptr = ptr->rightChild;
+	//	}
+	//	if (ptr != nullptr)
+	//		if (ptr->leftChild == nullptr && ptr->rightChild == nullptr) {
+	//			cout << ptr->symbol;
+	//			cout << "ptr" << ptr << endl;
+	//			ptr = &root;
+	//			cout << root << endl;
+	//		}
+	//}
 }
 //	void decode(HuffNode*root,string& arr,char symbol=' ');
