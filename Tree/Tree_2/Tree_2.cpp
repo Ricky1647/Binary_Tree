@@ -41,6 +41,7 @@ public:
 	void Inorder(HuffNode *current,int& a, int& max ,int level=0);
  	void pop();
 	void encode(HuffNode*root, string word = "");
+	void decode(HuffNode*root,char *arr,char symbol);
 	void Preorder(HuffNode *current);
 	HuffNode top();
 	int sizeback();
@@ -109,7 +110,9 @@ int main()
 	cout << "Huffman coding" << endl;
 	min_heap.encode(root);
 	cout << "==========================================" << endl;
-	//9 8 7 6 5 4 3 2 1
+	char *face = {};
+	cout << "Input sequence for decode: ";
+	while (cin >> face);
      return 0;
 }
 void MinHeap::print() {
