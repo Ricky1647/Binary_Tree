@@ -108,6 +108,7 @@ int main()
 	cout << "==========================================" << endl;
 	cout << "Huffman coding" << endl;
 	min_heap.encode(root);
+	cout << "==========================================" << endl;
 	//9 8 7 6 5 4 3 2 1
      return 0;
 }
@@ -197,12 +198,12 @@ void MinHeap::Preorder(HuffNode *current) {
 	}
 }
 void MinHeap::encode(HuffNode *root , string word) {
-	if (root->leftChild == NULL&&root->rightChild == NULL) 
+	if (root->leftChild == nullptr&&root->rightChild == nullptr) 
 	{
 		cout << root->symbol << " : "<< word<<endl;
 	}
 	if (root->leftChild != nullptr)
-		encode(root , word + '1');
+		encode(root->leftChild , word + '1');
 	if (root->rightChild != nullptr)
-		encode(root , word + '0');
+		encode(root->rightChild , word + '0');
 }
